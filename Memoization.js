@@ -1,3 +1,5 @@
+// 참고자료 : https://www.youtube.com/watch?v=WbwP4w6TpCk
+
 const prevValues = [];
 
 function square(n) {
