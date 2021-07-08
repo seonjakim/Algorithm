@@ -26,6 +26,7 @@ const addNode = (airport) => {
 const addEdge = (origin, destination) => {
   adjacencyList.get(origin).push(destination);
   adjacencyList.get(destination).push(origin);
+  //console.log(adjacencyList);
 }
 
 airports.forEach(addNode);
