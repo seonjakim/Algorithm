@@ -14,15 +14,23 @@ function hashSringToInt(s, tableSize) {
 }
 
 class HashTable {
-  table = new Array(17);
+  table = new Array(3);
   numItems = 0;
   resize = () => {
-    const newTable = new Array(table.length * 2);
+    const newTable = new Array(this.table.length * 2);
     this.table.forEach((item) => {
       if (item) {
-        item.forEach(([key, value]) => {});
+        item.forEach(([key, value]) => {
+          const idx = hashSringToInt(key, newTable.length);
+          if (newTable[idx]) {
+            newTable[idx].push([key, value]);
+          } else {
+            newTable[idx] = [[key, value]];
+          }
+        });
       }
     });
+    this.table = newTable;
   };
 
   setItem = (key, value) => {
@@ -46,5 +54,9 @@ class HashTable {
 
 const myTable = new HashTable();
 myTable.setItem('firstName', 'bob');
+myTable.setItem('lastName', 'Doe');
+myTable.setItem('age', 5);
+myTable.setItem('date of birth', '1/2/3');
 myTable.getItem('firstName');
 console.log(myTable.getItem('firstName'));
+console.log(myTable.table.length);
