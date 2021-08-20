@@ -75,3 +75,18 @@ function recursiveRange(num) {
   return num + recursiveRange(num - 1)
 }
 console.log(recursiveRange(6))
+
+function fib(num, memo = []) {
+  if (memo[num] !== undefined) {
+    return memo[num]
+  }
+  let res
+  if (num <= 2) {
+    res = 1
+  } else {
+    res = fib(num - 1, memo) + fib(num - 2, memo)
+  }
+  memo[num] = res
+  return res
+}
+console.log(fib(4))
