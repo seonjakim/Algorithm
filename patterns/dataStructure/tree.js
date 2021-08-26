@@ -15,6 +15,16 @@
  * searching : O(log n)
  */
 
+/**
+ * tree traversal
+ * breath first
+ * - travel every node in the same level
+ * depth first
+ * - pre order : when you want to clone the tree in the other place
+ * - post order :
+ * - in order : the result gonna be a sorted array
+ */
+
 class Node {
   constructor(val) {
     this.val = val
@@ -83,5 +93,56 @@ class BinarySearchTree {
       }
     }
     return false
+  }
+
+  BFS() {
+    let queue = [],
+      data = [],
+      node = this.root
+    queue.push(node)
+    while (queue.length) {
+      node = queue.shift()
+      data.push(node)
+      if (node.left) queue.push(node.left)
+      if (node.right) queue.push(node.right)
+    }
+    return data
+  }
+
+  DFSPreOrder() {
+    let data = [],
+      current = this.root
+    function traverse(node) {
+      data.push(node.val)
+      if (node.left) traverse(node.left)
+      if (node.right) traverse(node.right)
+    }
+    traverse(current)
+    return data
+  }
+
+  // bottom up
+  DFSPostOrder() {
+    let data = [],
+      current = this.root
+    function traverse(node) {
+      if (node.left) traverse(node.left)
+      if (node.right) traverse(node.right)
+      data.push(node.val)
+    }
+    traverse(current)
+    return data
+  }
+  // return all the left side value and return right side
+  DFSInOrder() {
+    let data = [],
+      current = this.root
+    function traverse(node) {
+      if (node.left) traverse(node.left)
+      data.push(node.val)
+      if (node.right) traverse(node.right)
+    }
+    traverse(current)
+    return data
   }
 }
