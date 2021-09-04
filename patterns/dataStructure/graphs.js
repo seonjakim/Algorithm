@@ -14,3 +14,23 @@
  * - directed / undirected
  * - weighted / unweighted
  */
+
+/**
+ * Adjacency matrix
+ * - takes up more space
+ * - faster to lookup specific edge
+ *
+ * Adjacency list
+ * - takes up less space
+ * - faster to iterate over all edges
+ */
+
+class Graph {
+  constructor() {
+    this.adjacencyList = {}
+  }
+
+  addVertex(key) {
+    if (!this.adjacencyList[key]) this.adjacencyList[key] = []
+  }
+}
