@@ -33,4 +33,38 @@ class Graph {
   addVertex(key) {
     if (!this.adjacencyList[key]) this.adjacencyList[key] = []
   }
+
+  addEdge(v1, v2) {
+    // if (!this.adjacencyList[v1]) this.adjacencyList[v1] = []
+    // if (!this.adjacencyList[v2]) this.adjacencyList[v2] = []
+    this.adjacencyList[v1].push(v2)
+    this.adjacencyList[v2].push(v1)
+  }
+
+  search(el, value) {
+    const targetArr = this.adjacencyList[el]
+    const len = targetArr.length
+    for (let i = 0; i < len; i++) {
+      if (targetArr[i] === value) {
+        targetArr[i] = targetArr[len - 1]
+        targetArr.pop()
+        return
+      }
+    }
+  }
+  removeEdge(v1, v2) {
+    // this.search(v1, v2)
+    // this.search(v2, v1)
+    this.adjacencyList[v1] = this.adjacencyList[v1].filter((el) => el !== v2)
+    this.adjacencyList[v2] = this.adjacencyList[v2].filter((el) => el !== v1)
+  }
+  removeVertex(vertex) {
+    const targetArr = this.adjacencyList[vertex]
+    while (targetArr.length) {
+      const target = targetArr.pop()
+      this.removeEdge(vertex, target)
+    }
+    delete targetArr
+    return this
+  }
 }
