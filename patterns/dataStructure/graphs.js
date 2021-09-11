@@ -30,8 +30,11 @@
  * - prioritizing visiting childeren?
  * - moving away from the root
  *
- * Breath First
- * -
+ */
+
+/**
+ * Breadth First
+ * - visit neighbors at current depth first
  */
 
 class Graph {
@@ -80,7 +83,9 @@ class Graph {
   DFSRecursive(start) {
     const result = []
     const visited = {}
-    const adjacencyList = this.adjacencyList(function dfs(vertex) {
+    const adjacencyList = this.adjacencyList
+
+    ;(function dfs(vertex) {
       if (!vertex) return null
       visited[vertex] = true
       result.push(vertex)
@@ -90,6 +95,47 @@ class Graph {
         }
       })
     })(start)
+    return result
+  }
+  DFSInterative(start) {
+    const result = []
+    const visited = {}
+    const stack = [start]
+    let currentVertex
+
+    visited[start] = true
+    while (stack.length) {
+      currentVertex = stack.pop()
+      result.push(currentVertex)
+
+      this.adjacencyList[currentVertex].forEach((neighbor) => {
+        if (!visited[neighbor]) {
+          visited[neighbor] = true
+          stack.push(neighbor)
+        }
+      })
+    }
+    return result
+  }
+
+  BFS(start) {
+    const queue = [start]
+    const result = []
+    const visited = {}
+    let currentVertex
+    visited[start] = true
+
+    while (queue.length) {
+      currentVertex = queue.shift()
+      result.push(currentVertex)
+
+      this.adjacencyList[currentVertex].forEach((neighbor) => {
+        if (!visited[neighbor]) {
+          visited[neighbor] = true
+          queue.push(neighbor)
+        }
+      })
+    }
     return result
   }
 }
