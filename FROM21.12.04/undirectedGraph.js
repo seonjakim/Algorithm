@@ -1,5 +1,33 @@
 // 참고자료 : https://www.youtube.com/watch?v=tWVWeAqZ0WU&ab_channel=freeCodeCamp.org
 
+const depthFirstPrint = (graph, source) => {
+  const stack = [source]
+  while (stack.length) {
+    const current = stack.pop()
+    for (let neighbor of graph[current]) {
+      stack.push(neighbor)
+    }
+  }
+}
+const depthFirstPrint = (graph, source) => {
+  console.log(source)
+  for (let neighbor of graph[source]) {
+    depthFirstPrint(graph, neighbor)
+  }
+}
+
+const breadFirstPrint = (graph, source) => {
+  const queue = [source]
+
+  while (queue.length) {
+    const current = queue.shift()
+
+    for (let neighbor of graph[current]) {
+      queue.push(neighbor)
+    }
+  }
+}
+
 const undirectedPath = (edges, nodeA, nodeB) => {
   const graph = buildGraph(edges)
   return hasPath(graph, nodeA, nodeB, new Set())
